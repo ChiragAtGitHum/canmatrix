@@ -176,7 +176,11 @@ def writeSignalx(db, sig, row, rearCol):
         row[13] = "s"
     else:
         row[13] = "u"
-
+        
+    # Factor and Offset
+    row[14] = sig.factor
+    row[15] = sig.offset
+    
     # is a unit defined for signal?
     if sig.unit.strip().__len__() > 0:
         # factor not 1.0 ?
@@ -207,7 +211,9 @@ def dump(db, thefile, delimiter=',', **options):
         'Signal Default',
         ' Signal Not Available',
         'Byteorder',
-        'is signed']
+        'is signed',
+        'Factor',
+        'Offset']
     head_tail = ['Value', 'Name / Phys. Range', 'Function / Increment Unit']
 
     csvtable = list()  # List holding all csv rows
